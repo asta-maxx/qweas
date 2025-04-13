@@ -1,6 +1,6 @@
 'use client';
 
-import {medicalInfoRetrieval, MedicalInfoRetrievalInput} from '@/ai/flows/medical-info-retrieval';
+import {medicalInfoRetrieval, MedicalInfoRetrievalInput, MedicalInfoRetrievalOutput} from '@/ai/flows/medical-info-retrieval';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
@@ -9,7 +9,7 @@ import {useState} from 'react';
 
 const MedicalInfoRetrievalComponent = () => {
   const [query, setQuery] = useState('');
-  const [medicalInfo, setMedicalInfo] = useState('');
+  const [medicalInfo, setMedicalInfo] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleMedicalInfoRetrieval = async () => {
@@ -18,7 +18,7 @@ const MedicalInfoRetrievalComponent = () => {
       const input: MedicalInfoRetrievalInput = {
         query: query,
       };
-      const result = await medicalInfoRetrieval(input);
+      const result: MedicalInfoRetrievalOutput = await medicalInfoRetrieval(input);
       setMedicalInfo(result.answer);
     } catch (error) {
       console.error('Error during medical info retrieval:', error);

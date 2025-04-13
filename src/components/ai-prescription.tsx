@@ -1,6 +1,6 @@
 'use client';
 
-import {generatePrescription, GeneratePrescriptionInput} from '@/ai/flows/ai-prescription';
+import {generatePrescription, GeneratePrescriptionInput, GeneratePrescriptionOutput} from '@/ai/flows/ai-prescription';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
@@ -10,7 +10,7 @@ import {useState} from 'react';
 const AIPrescriptionComponent = () => {
   const [condition, setCondition] = useState('');
   const [patientDetails, setPatientDetails] = useState('');
-  const [prescriptionResult, setPrescriptionResult] = useState<any>(null);
+  const [prescriptionResult, setPrescriptionResult] = useState<GeneratePrescriptionOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGeneratePrescription = async () => {
@@ -27,7 +27,7 @@ const AIPrescriptionComponent = () => {
       setPrescriptionResult({
         possiblePrescriptions: [],
         disclaimer: 'An error occurred during prescription generation. Please try again.',
-      });
+      } as any);
     } finally {
       setIsLoading(false);
     }

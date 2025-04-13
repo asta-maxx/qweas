@@ -1,6 +1,6 @@
 'use client';
 
-import {aiDiagnosis, AIDiagnosisInput} from '@/ai/flows/ai-diagnosis';
+import {aiDiagnosis, AIDiagnosisInput, AIDiagnosisOutput} from '@/ai/flows/ai-diagnosis';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
@@ -9,7 +9,7 @@ import {useState} from 'react';
 
 const AIDiagnosisComponent = () => {
   const [medicalState, setMedicalState] = useState('');
-  const [diagnosisResult, setDiagnosisResult] = useState<any>(null);
+  const [diagnosisResult, setDiagnosisResult] = useState<AIDiagnosisOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDiagnosis = async () => {

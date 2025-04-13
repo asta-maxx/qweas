@@ -1,6 +1,6 @@
 'use client';
 
-import {symptomChecker, SymptomCheckerInput} from '@/ai/flows/symptom-checker';
+import {symptomChecker, SymptomCheckerInput, SymptomCheckerOutput} from '@/ai/flows/symptom-checker';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
@@ -9,7 +9,7 @@ import {useState} from 'react';
 
 const SymptomCheckerComponent = () => {
   const [symptoms, setSymptoms] = useState('');
-  const [checkerResult, setCheckerResult] = useState<any>(null);
+  const [checkerResult, setCheckerResult] = useState<SymptomCheckerOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSymptomCheck = async () => {
@@ -25,7 +25,7 @@ const SymptomCheckerComponent = () => {
       setCheckerResult({
         potentialCauses: 'An error occurred during symptom check. Please try again.',
         suggestedNextSteps: 'Please try again or consult a healthcare professional.',
-      });
+      } as any);
     } finally {
       setIsLoading(false);
     }
