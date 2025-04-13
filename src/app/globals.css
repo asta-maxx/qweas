@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,39 +9,34 @@ body {
 
 @layer base {
   :root {
-    --background: 20 14.3% 4.1%;
-    --foreground: 0 0% 98%;
-    --card: 20 14.3% 4.1%;
-    --card-foreground: 0 0% 98%;
-    --popover: 20 14.3% 4.1%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 206.7 83.3% 59.8%;
-    --primary-foreground: 240 10% 3.9%;
-    --secondary: 24 9.8% 14.1%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 24 9.8% 14.1%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 180 100% 15%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 24 9.8% 14.1%;
-    --input: 24 9.8% 14.1%;
-    --ring: 206.7 83.3% 59.8%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --background: 0 0% 0%; /* Black */
+    --foreground: 0 0% 98%; /* Off-White */
+    --card: 0 0% 0%; /* Black */
+    --card-foreground: 0 0% 98%; /* Off-White */
+    --popover: 0 0% 0%; /* Black */
+    --popover-foreground: 0 0% 98%; /* Off-White */
+    --primary: 0 100% 50%; /* Red */
+    --primary-foreground: 0 0% 100%; /* White */
+    --secondary: 0 0% 20%; /* Dark Gray */
+    --secondary-foreground: 0 0% 98%; /* Off-White */
+    --muted: 0 0% 20%; /* Dark Gray */
+    --muted-foreground: 0 0% 60%; /* Gray */
+    --accent: 0 0% 30%; /* Medium Gray */
+    --accent-foreground: 0 0% 98%; /* Off-White */
+    --destructive: 0 100% 50%; /* Red */
+    --destructive-foreground: 0 0% 100%; /* White */
+    --border: 0 0% 30%; /* Medium Gray */
+    --input: 0 0% 30%; /* Medium Gray */
+    --ring: 0 100% 50%; /* Red */
     --radius: 0.5rem;
-    --sidebar-background: 20 14.3% 4.1%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 24 9.8% 14.1%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 24 9.8% 14.1%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 0 0% 0%; /* Black */
+    --sidebar-foreground: 0 0% 98%; /* Off-White */
+    --sidebar-primary: 0 100% 50%; /* Red */
+    --sidebar-primary-foreground: 0 0% 100%; /* White */
+    --sidebar-accent: 0 0% 20%; /* Dark Gray */
+    --sidebar-accent-foreground: 0 0% 98%; /* Off-White */
+    --sidebar-border: 0 0% 30%; /* Medium Gray */
+    --sidebar-ring: 0 100% 50%; /* Red */
   }
 }
 
