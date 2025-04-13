@@ -2,44 +2,45 @@
 
 import {Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider} from '@/components/ui/sidebar';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import SymptomCheckerComponent from "@/components/symptom-checker";
 import MedicalInfoRetrievalComponent from "@/components/medical-info-retrieval";
 import AIDiagnosisComponent from "@/components/ai-diagnosis";
 import AIPrescriptionComponent from "@/components/ai-prescription";
 import {Home} from "lucide-react";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {Textarea} from "@/components/ui/textarea";
 
 const Page = () => {
-  const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
+  const [messages, setMessages] = useState<{ role: string; content: string; }[]>([]);
+  const [input, setInput] = useState('');
+  const chatAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.title = 'MediZen';
   }, []);
 
-  const renderComponent = () => {
-    switch (selectedComponent) {
-      case 'symptom-checker':
-        return <SymptomCheckerComponent/>;
-      case 'medical-info':
-        return <MedicalInfoRetrievalComponent/>;
-      case 'ai-diagnosis':
-        return <AIDiagnosisComponent/>;
-      case 'ai-prescription':
-        return <AIPrescriptionComponent/>;
-      default:
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Welcome to MediZen</CardTitle>
-              <CardDescription>Select an option from the sidebar to get started.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              Explore the AI-powered medical tools to assist with your health inquiries.
-            </CardContent>
-          </Card>
-        );
+  const handleSendMessage = () => {
+    if (input.trim()) {
+      setMessages([...messages, { role: 'user', content: input }]);
+      // Simulate AI response
+      setTimeout(() => {
+        setMessages(prevMessages => [...prevMessages, {
+          role: 'assistant',
+          content: 'This is a simulated response from the AI. ' +
+            'Please note that this is not a real medical advice.'
+        }]);
+      }, 500);
+      setInput('');
     }
   };
+
+  useEffect(() => {
+    if (chatAreaRef.current) {
+      chatAreaRef.current.scrollTop = chatAreaRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   return (
     <SidebarProvider>
@@ -52,28 +53,28 @@ const Page = () => {
             <SidebarGroup>
               <SidebarMenu>
                 <SidebarMenuItem>
-                  <SidebarMenuButton onClick={() => setSelectedComponent(null)}>
+                  <SidebarMenuButton onClick={() => setMessages([])}>
                     <Home/>
                     <span>Home</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton onClick={() => setSelectedComponent('symptom-checker')}>
+                  <SidebarMenuButton>
                     <span>Symptom Checker</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton onClick={() => setSelectedComponent('medical-info')}>
+                  <SidebarMenuButton>
                     <span>Medical Info</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton onClick={() => setSelectedComponent('ai-diagnosis')}>
+                  <SidebarMenuButton>
                     <span>AI Diagnosis</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton onClick={() => setSelectedComponent('ai-prescription')}>
+                  <SidebarMenuButton>
                     <span>AI Prescription</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -89,8 +90,33 @@ const Page = () => {
           </p>
         </SidebarFooter>
       </Sidebar>
-      <main className="flex-1 p-4">
-        {renderComponent()}
+      <main className="flex-1 p-4 flex flex-col h-screen">
+        <div ref={chatAreaRef} className="flex-1 overflow-y-auto mb-4">
+          {messages.map((message, index) => (
+            <div key={index} className={`mb-2 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
+              <div
+                className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-200' : 'bg-gray-200'}`}
+              >
+                {message.content}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex items-center">
+          <Textarea
+            placeholder="Enter your message here"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="flex-1 rounded-l-md border-r-0"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSendMessage();
+              }
+            }}
+          />
+          <Button onClick={handleSendMessage} className="rounded-l-none">Send</Button>
+        </div>
       </main>
     </SidebarProvider>
   );
