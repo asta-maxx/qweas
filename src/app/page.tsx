@@ -39,10 +39,18 @@ const Page = () => {
       default:
         return (
           <Card className="w-full">
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
+            <CardContent className="flex flex-col items-center justify-center">
+              <p className="text-sm text-muted-foreground mb-4">
                 Select a tool from the sidebar to start.
               </p>
+              <div className="text-center">
+                <blockquote className="text-lg font-semibold italic text-accent-foreground">
+                  "The greatest medicine of all is teaching people how not to need it."
+                </blockquote>
+                <figcaption className="mt-2 text-sm text-muted-foreground">
+                  - Hippocrates
+                </figcaption>
+              </div>
             </CardContent>
           </Card>
         );
